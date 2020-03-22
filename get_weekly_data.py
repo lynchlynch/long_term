@@ -12,12 +12,12 @@ leap = 5#设置每组股票数
 groups = list(range(0,len(stock_code)//leap + 1))#分组
 no_data_stocks = []#储存无数据股票代码，以便重新下载
 download_failed_stocks = []
-root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
-# root_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/weekly_data/'
+# root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+root_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 
 # start_date = '20171009'
 start_date = '20121009'
-current_day = '20200309'
+current_day = '20200322'
 
 start_time = time.time()
 

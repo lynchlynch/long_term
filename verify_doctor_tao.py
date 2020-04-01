@@ -4,15 +4,18 @@ from multiprocessing import Pool
 import os
 import numpy as np
 
+import get_date as gd
 import select_rps as sr
 import new_yearly_high_price as nyhp
 
-stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
 # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
 report_path = 'D:/pydir/Raw Data/Report/PerReport'
 # report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
 result_path = 'D:/pydir/docter_tao/result'
 # result_path = '/Users/pei/PycharmProjects/docter_tao/result'
+weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+# weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
 start_time = time.time()
 
@@ -25,6 +28,7 @@ high_price_threshold = 0.9
 # rps_threshold_list = [45, 45, 45]
 rps_threshold_list = [80, 80, 80]
 
+'''
 # 获取前一个交易日的日期
 data_orgin_1 = pd.read_csv(stock_path + '/000001.csv')
 current_date_index_1 = data_orgin_1[data_orgin_1['trade_date'] == current_process_date].index.tolist()[0]
@@ -45,13 +49,24 @@ else:
     pre_date_4 = data_orgin_4['trade_date'][current_date_index_4 - 1]
     if pre_date_4 == pre_date_1 or pre_date_4 == pre_date_2 or pre_date_4 == pre_date_3:
         pre_date = pre_date_4
+'''
+week_data_orgin = pd.read_csv(weekly_stock_path + '/000001.csv')
+week_list = week_data_orgin['trade_date'].tolist()
 
+for week_index in list(range(len(week_list)))[1:]:
+    #获取周一的日期
+    last_week_end = week_list[week_index-1]
+    week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
+    #获取周五的日期
+    week_end_date = week_list[week_index]
 
-rps_df, rps_df_above_theshold = sr.rps_sorted(stock_path, rps_N1, stock_length, current_process_date)
+    print(str(week_start_date) + '-------' + str(week_end_date))
+'''
+rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
 
 stock_code_df = sr.rps_reverse(stock_path, rps_df_above_theshold, current_process_date)
 # 计算120,250的rps
 rps_df2, rps_df_above_theshold2 = sr.rps_sorted(stock_path, rps_N2, stock_length, current_process_date)
 rps_df3, rps_df_above_theshold3 = sr.rps_sorted(stock_path, rps_N3, stock_length, current_process_date)
-rps_df3_pre, rps_df_above_theshold3 = sr.rps_sorted(stock_path, rps_N3, stock_length, pre_date)
-
+# rps_df3_pre, rps_df_above_theshold3 = sr.rps_sorted(stock_path, rps_N3, stock_length, pre_date)
+'''

@@ -1,2 +1,5 @@
-a = [2,3,4,1,10]
-print(a.index(3))
+import pandas as pd
+
+a = [5,4,3,2,1]
+# a.sort()
+print(a[1:5])

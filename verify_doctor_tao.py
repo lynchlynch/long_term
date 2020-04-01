@@ -59,8 +59,13 @@ for week_index in list(range(len(week_list)))[1:]:
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
     #获取周五的日期
     week_end_date = week_list[week_index]
+    #获取这一周每天的日期
+    week_date_list = gd.get_week_date_list(week_start_date,week_end_date,daily_stock_path)
+    for single_date in week_date_list:
+        stock_code_df = sr.rps_reverse(daily_stock_path, rps_df_above_theshold, current_process_date)
+        print(stock_code_df['code'])
+        #任意两线翻红
 
-    print(str(week_start_date) + '-------' + str(week_end_date))
 '''
 rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
 

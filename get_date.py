@@ -31,11 +31,14 @@ def get_week_date_list(week_start_date,week_end_date,daily_stock_path):
     end_index = total_data_list.index(week_end_date)
     week_date_list = total_data_list[start_index:end_index+1]
     return week_date_list
-    '''
-    if last_week_end not in data_orgin_1_date_list:
-        current_date_index = data_orgin_2_date_list.index(last_week_end)
-        week_start_date = data_orgin_2_date_list[current_date_index+1]
+
+def get_first_observe_date(single_stock_data,first_week_date):
+    date_list_in_daily = single_stock_data['trade_date'].tolist()
+    if first_week_date in date_list_in_daily:
+        first_observe_date = first_week_date
     else:
-        current_date_index = data_orgin_1_date_list.index(last_week_end)
-        week_start_date = data_orgin_1_date_list[current_date_index+1]
-    '''
+        for single_date_index in range(len(date_list_in_daily)-1):
+            if first_week_date > date_list_in_daily[single_date_index] \
+                    and first_week_date < date_list_in_daily[single_date_index +1]:
+                first_observe_date = date_list_in_daily[single_date_index + 1]
+    return first_observe_date

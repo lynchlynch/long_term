@@ -7,6 +7,7 @@ import numpy as np
 import get_date as gd
 import select_rps as sr
 import new_yearly_high_price as nyhp
+import zeroize
 
 daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
 # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
@@ -67,7 +68,10 @@ for week_index in list(range(len(week_list)))[1:-1]:
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
     for single_code in weekly_code_list:
-        buy_observe_first_week = week_list[week_index+1]
+        single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
+        print(single_stock_data['ts_code'])
+        buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
+        print(buy_observe_first_week)
 
 
 

@@ -3,11 +3,14 @@ import pandas as pd
 from multiprocessing import Pool
 import os
 import numpy as np
+import time
 
 import get_date as gd
 import select_rps as sr
 import new_yearly_high_price as nyhp
 import zeroize
+
+start_time = time.time()
 
 daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
 # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
@@ -22,7 +25,7 @@ start_time = time.time()
 
 rps_N1 = 50
 stock_length = 500
-current_process_date = 20200327
+current_process_date = 20200306
 rps_N2 = 120
 rps_N3 = 250
 high_price_threshold = 0.9
@@ -67,14 +70,17 @@ for week_index in list(range(len(week_list)))[1:-1]:
 
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
+    print(weekly_code_list)
     for single_code in weekly_code_list:
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
-        print(single_stock_data['ts_code'])
+        print(single_stock_data['ts_code'].tolist()[0])
+        print(week_end_date)
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
         print(buy_observe_first_week)
 
 
-
+end_time = time.time()
+print('time elapse : ' + str(end_time-start_time))
 '''
 rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
 

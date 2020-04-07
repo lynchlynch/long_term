@@ -36,6 +36,7 @@ week_data_orgin = pd.read_csv(weekly_stock_path + '/000001.csv')
 week_list = week_data_orgin['trade_date'].tolist()
 
 for week_index in list(range(len(week_list)))[1:-1]:
+# for week_index in list(range(len(week_list)))[1:2]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
@@ -45,6 +46,7 @@ for week_index in list(range(len(week_list)))[1:-1]:
     week_date_list = gd.get_week_date_list(week_start_date,week_end_date,daily_stock_path)
     weekly_selected_stock_list = []
     for single_date in week_date_list:
+        current_process_date = single_date
         rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
         rps_df2, rps_df_above_theshold2 = sr.rps_sorted(daily_stock_path, rps_N2, stock_length, current_process_date)
         rps_df3, rps_df_above_theshold3 = sr.rps_sorted(daily_stock_path, rps_N3, stock_length, current_process_date)

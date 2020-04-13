@@ -47,6 +47,7 @@ for week_index in list(range(len(week_list)))[1:-1]:
     weekly_selected_stock_list = []
     for single_date in week_date_list:
         current_process_date = single_date
+        print('current_process_date' + str(current_process_date))
         rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
         rps_df2, rps_df_above_theshold2 = sr.rps_sorted(daily_stock_path, rps_N2, stock_length, current_process_date)
         rps_df3, rps_df_above_theshold3 = sr.rps_sorted(daily_stock_path, rps_N3, stock_length, current_process_date)
@@ -70,6 +71,7 @@ for week_index in list(range(len(week_list)))[1:-1]:
     weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
     weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
 
+    print(weekly_selected_stock_list)
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
     for single_code in weekly_code_list:

@@ -45,7 +45,7 @@ def get_first_observe_date(single_stock_data,week_end_date):
     return first_observe_date
 
 def get_buy_date(single_stock_week_list,first_observe_date):
-    for week_index in range(len(single_stock_week_list-1)):
+    for week_index in range(len(single_stock_week_list)-1):
         if single_stock_week_list[week_index] >= first_observe_date:
             print(single_stock_week_list[week_index])
             print(first_observe_date)

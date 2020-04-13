@@ -44,11 +44,15 @@ def get_first_observe_date(single_stock_data,week_end_date):
                 first_observe_date = date_list_in_daily[single_date_index + 1]
     return first_observe_date
 
-def get_buy_date(single_stock_week_list,first_observe_date):
-    for week_index in range(len(single_stock_week_list)-1):
-        if single_stock_week_list[week_index] >= first_observe_date:
-            print(single_stock_week_list[week_index])
-            print(first_observe_date)
-            buy_date = single_stock_week_list[week_index+1]
+def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date):
+    single_stock_week_list = single_stock_week_data['trade_date'].tolist()
+    first_observe_date_index = single_stock_week_list.index(first_observe_date)
+    for week_index in range(first_observe_date_index, len(single_stock_week_list)-1):
+        pre_week_highest_price = single_stock_week_data['high'].tolist()[week_index]
+        pre_week_10k_ma = single_stock_week_data['ma5'].tolist()[week_index]
+        pre_weekend_date = single_stock_week_data['trade_date'].tolist()[week_index]
+        if pre_week_10k_ma >= pre_week_highest_price:
+            pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
+            buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily+1]
             break
     return buy_date

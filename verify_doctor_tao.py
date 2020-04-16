@@ -39,6 +39,13 @@ target_rate = 0.5
 week_data_orgin = pd.read_csv(weekly_stock_path + '/000001.csv')
 week_list = week_data_orgin['trade_date'].tolist()
 
+#获取周线文件列表
+weekly_file_list = os.listdir(weekly_stock_path)
+for single_file in weekly_file_list:
+    if single_file.split('.')[1] != 'csv':
+        os.remove(weekly_stock_path + single_file)
+weekly_file_list = os.listdir(weekly_stock_path)
+
 # for week_index in list(range(len(week_list)))[55:-1]:
 for week_index in list(range(len(week_list)))[55:60]:
     #获取周一的日期
@@ -70,8 +77,9 @@ for week_index in list(range(len(week_list)))[55:60]:
             if (stock_rps1 > rps_threshold_list[0] and stock_rps2 > rps_threshold_list[1]) or \
                     (stock_rps1 > rps_threshold_list[0] and stock_rps3 > rps_threshold_list[2]) or \
                     (stock_rps2 > rps_threshold_list[1] and stock_rps3 > rps_threshold_list[2]):
-                weekly_selected_stock_list.append([single_date,single_code, stock_rps1, stock_rps2, stock_rps3,
-                                                  yearly_high_indice])
+                if (single_code + '.csv') in weekly_file_list:
+                    weekly_selected_stock_list.append([single_date,single_code, stock_rps1, stock_rps2, stock_rps3,
+                                                      yearly_high_indice])
 
     weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
     weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')

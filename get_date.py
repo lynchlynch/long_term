@@ -47,8 +47,10 @@ def get_first_observe_date(single_stock_data,week_end_date):
 def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date):
     single_stock_week_list = single_stock_week_data['trade_date'].tolist()
     # first_observe_date_index = single_stock_week_list.index(first_observe_date)
-    first_observe_date_index = single_stock_week_list.index(first_observe_date)
-    for week_index in range(first_observe_date_index, len(single_stock_week_list)-1):
+    first_observe_date_index = single_stock_data['trade_date'].tolist().index(first_observe_date)
+    first_observe_monday_index = single_stock_week_list.index\
+        (single_stock_data['trade_date'].tolist()[first_observe_date_index+1])
+    for week_index in range(first_observe_monday_index, len(single_stock_week_list)-1):
         pre_week_highest_price = single_stock_week_data['high'].tolist()[week_index]
         pre_week_10k_ma = single_stock_week_data['ma5'].tolist()[week_index]
         pre_weekend_date = single_stock_week_data['trade_date'].tolist()[week_index]

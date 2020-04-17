@@ -55,7 +55,17 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
         pre_week_10k_ma = single_stock_week_data['ma5'].tolist()[week_index]
         pre_weekend_date = single_stock_week_data['trade_date'].tolist()[week_index]
         if pre_week_10k_ma >= pre_week_highest_price:
-            pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
-            buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily+1]
-            break
+            if pre_weekend_date in single_stock_data['trade_date'].tolist():
+                pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
+                buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily+1]
+                break
+            else:
+                for index in range(first_observe_date_index,len(single_stock_data)-1):
+                    if single_stock_data['trade_date'].tolist()[index] < pre_weekend_date and \
+                            single_stock_data['trade_date'].tolist()[index+1] > pre_weekend_date:
+                        pre_weekend_index_in_daily = index
+                        break
+                buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily + 1]
+                break
+    print(buy_date)
     return buy_date

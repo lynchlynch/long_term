@@ -47,7 +47,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[55:-1]:
-for week_index in list(range(len(week_list)))[55:60]:
+for week_index in list(range(len(week_list)))[56:60]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)

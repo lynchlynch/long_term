@@ -48,12 +48,21 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
     single_stock_week_list = single_stock_week_data['trade_date'].tolist()
     # first_observe_date_index = single_stock_week_list.index(first_observe_date)
     first_observe_date_index = single_stock_data['trade_date'].tolist().index(first_observe_date)
-    first_pre_weekend_index = single_stock_week_list.index\
-        (single_stock_data['trade_date'].tolist()[first_observe_date_index-1])
+    if single_stock_data['trade_date'].tolist()[first_observe_date_index-1] in single_stock_week_list:
+        first_pre_weekend_index = single_stock_week_list.index\
+            (single_stock_data['trade_date'].tolist()[first_observe_date_index-1])
+    else:
+        for index in range(len(single_stock_data)-first_observe_date_index-1):
+            if  single_stock_data['trade_date'].tolist()[first_observe_date_index+index] in single_stock_week_list:
+                first_pre_weekend_index = single_stock_week_list.index \
+                    (single_stock_data['trade_date'].tolist()[first_observe_date_index+index])
+                break
     for week_index in range(first_pre_weekend_index+1, len(single_stock_week_list)-1):
         pre_week_highest_price = single_stock_week_data['high'].tolist()[week_index]
         pre_week_10k_ma = single_stock_week_data['ma5'].tolist()[week_index]
         pre_weekend_date = single_stock_week_data['trade_date'].tolist()[week_index]
+        print('pre_week_10k_ma = ' + str(pre_week_10k_ma))
+        print('pre_weekend_date = ' + str(pre_weekend_date))
         if pre_week_10k_ma >= pre_week_highest_price:
             if pre_weekend_date in single_stock_data['trade_date'].tolist():
                 pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
@@ -67,5 +76,5 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
                         break
                 buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily + 1]
                 break
-    print(buy_date)
+    # print(buy_date)
     return buy_date

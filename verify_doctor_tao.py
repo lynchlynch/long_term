@@ -47,7 +47,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[55:-1]:
-for week_index in list(range(len(week_list)))[56:60]:
+for week_index in list(range(len(week_list)))[102:120]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
@@ -90,8 +90,9 @@ for week_index in list(range(len(week_list)))[56:60]:
     for single_code in weekly_code_list:
         print(single_code)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
-        buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
         single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
+        # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:
+        buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
         buy_date_monday = gd.get_buy_date_10(single_stock_data,single_stock_week_data,buy_observe_first_week)
         if (type(buy_date_monday)) == int:# and ([single_code,buy_date_monday] in buy_stock_log):
             #由于有可能存在连续好几天都出现doctor tao信号，而他们都是统一在同一天购买，因此会出现重复统计的情况，
@@ -112,13 +113,16 @@ for week_index in list(range(len(week_list)))[56:60]:
                                   buy_date_index_daily:len(single_stock_data)].index(highest_price)
                 sell_date = single_stock_data['trade_date'].tolist()[sell_date_index]
             increase_rate = (highest_price - buy_price) / buy_price
-            total_stock_list.append([single_code,buy_date_monday,sell_date,sell_date_index-buy_date_index_daily,
-                                     buy_price,highest_price,increase_rate])
+            if len([single_code,buy_date_monday,sell_date,sell_date_index-buy_date_index_daily,
+                                     buy_price,highest_price,increase_rate]) != 0:
+                total_stock_list.append([single_code,buy_date_monday,sell_date,sell_date_index-buy_date_index_daily,
+                                        buy_price,highest_price,increase_rate])
 
     total_stock_df = pd.DataFrame(total_stock_list,columns=['code','buy_date','sell_date','duration(day)',
                                                             'buy_price','sell_price','increase_rate'])
-    total_stock_df.to_csv(result_path + 'buy_under_10k/' + str(week_end_date) + '.csv')
+    total_stock_df.to_csv(result_path + 'buy_under_10k/' + str(week_end_date) + '.csv',index=False)
 
+# target_rate = 0.5
 per_day_result_list = os.listdir(result_path + 'buy_under_10k/')
 for single_file in per_day_result_list:
     if single_file.split('.')[1] != 'csv':
@@ -136,7 +140,7 @@ buy_stock_log = []
 
 for single_file in per_day_result_list:
     single_file_data = pd.read_csv(result_path + 'buy_under_10k/' + single_file)
-    for code_index in range(len(single_stock_data)):
+    for code_index in range(len(single_file_data)):
         stock_code = single_file_data['code'].tolist()[code_index]
         buy_date = single_file_data['buy_date'].tolist()[code_index]
         if [stock_code,buy_date] not in buy_stock_log:

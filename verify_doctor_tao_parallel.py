@@ -10,7 +10,8 @@ import select_rps as sr
 import new_yearly_high_price as nyhp
 import zeroize
 
-def get_per_stock_buy_date(week_index,daily_stock_path,weekly_stock_path):
+def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,
+                           rps_N2,rps_N3,stock_length,high_price_threshold,rps_threshold_list,weekly_file_list):
     last_week_end = week_list[week_index - 1]
     week_start_date = gd.get_week_start_date(last_week_end, daily_stock_path)
     # 获取周五的日期
@@ -98,7 +99,7 @@ if __name__ == '__main__':
     weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
     # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-    start_time = time.time()
+    # start_time = time.time()
 
     rps_N1 = 50
     stock_length = 500
@@ -106,7 +107,7 @@ if __name__ == '__main__':
     rps_N2 = 120
     rps_N3 = 250
     high_price_threshold = 0.9
-    rps_threshold_list = [85, 85, 85]
+    # rps_threshold_list = [85, 85, 85]
     rps_threshold_list = [80, 80, 80]
 
     duration_month = 8
@@ -123,12 +124,17 @@ if __name__ == '__main__':
             os.remove(weekly_stock_path + single_file)
     weekly_file_list = os.listdir(weekly_stock_path)
 
-    # for week_index in list(range(len(week_list)))[55:-1]:
-    for week_index in list(range(len(week_list)))[102:120]:
-        get_per_stock_buy_date(week_index, daily_stock_path, weekly_stock_path)
+    p = Pool(processes=10)
+    for week_index in list(range(len(week_list)))[51:]:
+        # get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,
+        #                    rps_N2,rps_N3,stock_length,high_price_threshold,rps_threshold_list,weekly_file_list)
+        p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,
+                                                   result_path,rps_N1,rps_N2,rps_N3,stock_length,
+                                                   high_price_threshold,rps_threshold_list,weekly_file_list))
+    p.close()
+    p.join()
 
-
-
+    '''
     per_day_result_list = os.listdir(result_path + 'buy_under_10k/')
     for single_file in per_day_result_list:
         if single_file.split('.')[1] != 'csv':
@@ -171,3 +177,4 @@ if __name__ == '__main__':
 
     end_time = time.time()
     print('time elapse : ' + str(end_time-start_time))
+'''

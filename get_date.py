@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 
 def get_week_start_date(last_week_end,daily_stock_path):
     data_orgin_1 = pd.read_csv(daily_stock_path + '/000001.csv')
@@ -61,8 +62,8 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
         pre_week_highest_price = single_stock_week_data['high'].tolist()[week_index]
         pre_week_10k_ma = single_stock_week_data['ma5'].tolist()[week_index]
         pre_weekend_date = single_stock_week_data['trade_date'].tolist()[week_index]
-        print('pre_week_10k_ma = ' + str(pre_week_10k_ma))
-        print('pre_weekend_date = ' + str(pre_weekend_date))
+        # print('pre_week_10k_ma = ' + str(pre_week_10k_ma))
+        # print('pre_weekend_date = ' + str(pre_weekend_date))
         if pre_week_10k_ma >= pre_week_highest_price:
             if pre_weekend_date in single_stock_data['trade_date'].tolist():
                 pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
@@ -76,5 +77,6 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
                         break
                 buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily + 1]
                 break
-    # print(buy_date)
+        if week_index == len(single_stock_week_list)-2:
+            buy_date = np.nan
     return buy_date

@@ -84,11 +84,11 @@ for week_index in list(range(len(week_list)))[102:120]:
     weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
     weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
 
-    print(weekly_selected_stock_list)
+    # print(weekly_selected_stock_list)
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
     for single_code in weekly_code_list:
-        print(single_code)
+        # print(single_code)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
         single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
         # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:

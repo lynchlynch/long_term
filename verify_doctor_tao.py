@@ -25,7 +25,7 @@ start_time = time.time()
 
 rps_N1 = 50
 stock_length = 500
-current_process_date = 20200306
+# current_process_date = 20200306
 rps_N2 = 120
 rps_N3 = 250
 high_price_threshold = 0.9
@@ -47,7 +47,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[55:-1]:
-for week_index in list(range(len(week_list)))[102:120]:
+for week_index in list(range(len(week_list)))[379:]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)

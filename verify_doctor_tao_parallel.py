@@ -16,13 +16,14 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
     week_start_date = gd.get_week_start_date(last_week_end, daily_stock_path)
     # 获取周五的日期
     week_end_date = week_list[week_index]
+    # print('-----------------' + str(week_end_date) + '-------------------')
     # 获取这一周每天的日期
     week_date_list = gd.get_week_date_list(week_start_date, week_end_date, daily_stock_path)
     weekly_selected_stock_list = []
     for single_date in week_date_list:
         total_stock_list = []
         current_process_date = single_date
-        print('current_process_date ： ' + str(current_process_date))
+        print(str(week_end_date) + '-------------------' + 'current_process_date ： ' + str(current_process_date))
         rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
         rps_df2, rps_df_above_theshold2 = sr.rps_sorted(daily_stock_path, rps_N2, stock_length, current_process_date)
         rps_df3, rps_df_above_theshold3 = sr.rps_sorted(daily_stock_path, rps_N3, stock_length, current_process_date)
@@ -134,7 +135,7 @@ if __name__ == '__main__':
     p.close()
     p.join()
 
-    '''
+
     per_day_result_list = os.listdir(result_path + 'buy_under_10k/')
     for single_file in per_day_result_list:
         if single_file.split('.')[1] != 'csv':
@@ -177,4 +178,3 @@ if __name__ == '__main__':
 
     end_time = time.time()
     print('time elapse : ' + str(end_time-start_time))
-'''

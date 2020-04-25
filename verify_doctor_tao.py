@@ -30,7 +30,7 @@ rps_N2 = 120
 rps_N3 = 250
 high_price_threshold = 0.9
 rps_threshold_list = [85, 85, 85]
-rps_threshold_list = [80, 80, 80]
+# rps_threshold_list = [80, 80, 80]
 
 duration_month = 8
 duration_day = duration_month * 4 * 5
@@ -81,8 +81,9 @@ for week_index in list(range(len(week_list)))[379:]:
                     weekly_selected_stock_list.append([single_date,single_code, stock_rps1, stock_rps2, stock_rps3,
                                                       yearly_high_indice])
 
-    weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
-    weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
+    if len(weekly_selected_stock_list) != 0:
+        weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
+        weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
 
     # print(weekly_selected_stock_list)
     #验证在十周线下买进

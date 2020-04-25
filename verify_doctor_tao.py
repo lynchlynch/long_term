@@ -81,9 +81,8 @@ for week_index in list(range(len(week_list)))[52:]:
                     weekly_selected_stock_list.append([single_date,single_code, stock_rps1, stock_rps2, stock_rps3,
                                                       yearly_high_indice])
 
-    if len(weekly_selected_stock_list) != 0:
-        weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
-        weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
+    weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
+    weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
 
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
@@ -156,8 +155,11 @@ for single_file in per_day_result_list:
             #计算满足上涨条件的数量
             if increase_rate >= target_rate:
                 count_num += 1
+    if len(single_file_data) == 0:
+        os.remove(result_path + 'buy_under_10k/' + single_file)
 
 print(count_num/total_num)
+
 
 end_time = time.time()
 print('time elapse : ' + str(end_time-start_time))

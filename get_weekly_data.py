@@ -16,8 +16,8 @@ download_failed_stocks = []
 root_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 
 # start_date = '20171009'
-start_date = '20121009'
-current_day = '20200322'
+start_date = '20111009'
+current_day = '20200424'
 
 start_time = time.time()
 

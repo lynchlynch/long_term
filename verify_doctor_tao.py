@@ -47,7 +47,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[55:-1]:
-for week_index in list(range(len(week_list)))[379:]:
+for week_index in list(range(len(week_list)))[52:]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
@@ -85,21 +85,16 @@ for week_index in list(range(len(week_list)))[379:]:
         weekly_selected_stock_df = pd.DataFrame(weekly_selected_stock_list,columns=['date','code','rps1','rps2','rps3','yearly_high?'])
         weekly_selected_stock_df.to_csv(result_path + 'raw/' + str(single_date) + '.csv')
 
-    # print(weekly_selected_stock_list)
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
     for single_code in weekly_code_list:
-        # print(single_code)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
         single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
-        # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
-        # print('buy_observe_first_week : ' + str(buy_observe_first_week))
         buy_date_monday = gd.get_buy_date_10(single_stock_data,single_stock_week_data,buy_observe_first_week)
         if (type(buy_date_monday)) == int:# and ([single_code,buy_date_monday] in buy_stock_log):
             #由于有可能存在连续好几天都出现doctor tao信号，而他们都是统一在同一天购买，因此会出现重复统计的情况，
             # 因此记录一下买入时间，以便去重
-            # buy_stock_log.append([single_code,buy_date_monday])
             buy_date_index_daily = single_stock_data['trade_date'].tolist().index(buy_date_monday)
             buy_price = single_stock_data['high'].tolist()[buy_date_index_daily]#用最高价测试
             if (buy_date_index_daily + duration_day) <= len(single_stock_data):
@@ -124,7 +119,6 @@ for week_index in list(range(len(week_list)))[379:]:
                                                             'buy_price','sell_price','increase_rate'])
     total_stock_df.to_csv(result_path + 'buy_under_10k/' + str(week_end_date) + '.csv',index=False)
 
-# target_rate = 0.5
 per_day_result_list = os.listdir(result_path + 'buy_under_10k/')
 for single_file in per_day_result_list:
     if single_file.split('.')[1] != 'csv':

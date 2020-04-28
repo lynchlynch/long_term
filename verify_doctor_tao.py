@@ -47,7 +47,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[55:-1]:
-for week_index in list(range(len(week_list)))[52:]:
+for week_index in list(range(len(week_list)))[-5:-3]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)
@@ -87,6 +87,7 @@ for week_index in list(range(len(week_list)))[52:]:
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
     for single_code in weekly_code_list:
+        print(single_code)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
         single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)

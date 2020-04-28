@@ -49,12 +49,13 @@ def get_buy_date_10(single_stock_data,single_stock_week_data,first_observe_date)
     single_stock_week_list = single_stock_week_data['trade_date'].tolist()
     # first_observe_date_index = single_stock_week_list.index(first_observe_date)
     first_observe_date_index = single_stock_data['trade_date'].tolist().index(first_observe_date)
+    print(first_observe_date_index)
     if single_stock_data['trade_date'].tolist()[first_observe_date_index-1] in single_stock_week_list:
         first_pre_weekend_index = single_stock_week_list.index\
             (single_stock_data['trade_date'].tolist()[first_observe_date_index-1])
     else:
         for index in range(len(single_stock_data)-first_observe_date_index-1):
-            if  single_stock_data['trade_date'].tolist()[first_observe_date_index+index] in single_stock_week_list:
+            if single_stock_data['trade_date'].tolist()[first_observe_date_index+index] in single_stock_week_list:
                 first_pre_weekend_index = single_stock_week_list.index \
                     (single_stock_data['trade_date'].tolist()[first_observe_date_index+index])
                 break

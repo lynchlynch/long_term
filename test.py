@@ -1,2 +1,3 @@
-a = [1,2,3,4,5]
-print(a[:-1])
+a = 20200327
+if type(a) == int:
+    print(a)

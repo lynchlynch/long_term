@@ -31,6 +31,7 @@ rps_N3 = 250
 high_price_threshold = 0.9
 rps_threshold_list = [75, 75, 75]
 # rps_threshold_list = [80, 80, 80]
+result_path = result_path + str(rps_threshold_list[0]) + '/'
 
 duration_month = 8
 duration_day = duration_month * 4 * 5
@@ -48,7 +49,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[-1:]:
-for week_index in list(range(len(week_list)))[105:106]:
+for week_index in list(range(len(week_list)))[52:]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)

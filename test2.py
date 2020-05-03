@@ -31,6 +31,7 @@ rps_N3 = 250
 high_price_threshold = 0.9
 rps_threshold_list = [75, 75, 75]
 # rps_threshold_list = [80, 80, 80]
+result_path = result_path + str(rps_threshold_list[0]) + '/'
 
 duration_month = 8
 duration_day = duration_month * 4 * 5
@@ -38,7 +39,7 @@ target_rate = 0.5
 
 week_data_orgin = pd.read_csv(weekly_stock_path + '/000001.csv')
 week_list = week_data_orgin['trade_date'].tolist()
-print(week_list)
+# print(len(week_list))
 
 #获取周线文件列表
 weekly_file_list = os.listdir(weekly_stock_path)
@@ -48,7 +49,7 @@ for single_file in weekly_file_list:
 weekly_file_list = os.listdir(weekly_stock_path)
 
 # for week_index in list(range(len(week_list)))[-1:]:
-for week_index in list(range(len(week_list)))[52:]:
+for week_index in list(range(len(week_list)))[275:]:
     #获取周一的日期
     last_week_end = week_list[week_index-1]
     week_start_date = gd.get_week_start_date(last_week_end,daily_stock_path)

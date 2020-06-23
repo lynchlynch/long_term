@@ -1,8 +1,6 @@
 #由于Tushare数据放在私人服务器中，如果一次获取较多数据，容易被误认为是DDos攻击，故分组获取
 import tushare as ts
 import time
-import pandas as pd
-import os
 from tqdm import tqdm
 
 ts.set_token('d34c57b1749de7df7766a60bb615078696e935856d99575c6b91bb5d')

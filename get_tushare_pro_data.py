@@ -6,8 +6,7 @@ from tqdm import tqdm
 ts.set_token('d34c57b1749de7df7766a60bb615078696e935856d99575c6b91bb5d')
 pro = ts.pro_api('d34c57b1749de7df7766a60bb615078696e935856d99575c6b91bb5d')
 stock_code = pro.query(exchange='', list_status='L', fields='ts_code')['ts_code']
-print(stock_code['ts_code'])
-'''
+
 leap = 5#设置每组股票数
 groups = list(range(0,len(stock_code)//leap + 1))#分组
 no_data_stocks = []#储存无数据股票代码，以便重新下载
@@ -81,4 +80,3 @@ for no_data_stock in tqdm(no_data_stocks,'save the no_data_stock'):
 end_time = time.time()
 
 print(end_time - start_time)
-'''

@@ -172,7 +172,8 @@ for single_file in per_day_result_list:
     if len(single_file_data) == 0:
         os.remove(result_path + 'buy_under_10k/' + single_file)
 
-print(count_num/total_num)
+print('purely doctor tao: ' + str(count_num/total_num))
+
 
 
 end_time = time.time()

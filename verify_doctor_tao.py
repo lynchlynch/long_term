@@ -174,7 +174,5 @@ for single_file in per_day_result_list:
 
 print('purely doctor tao: ' + str(count_num/total_num))
 
-
-
 end_time = time.time()
 print('time elapse : ' + str(end_time-start_time))

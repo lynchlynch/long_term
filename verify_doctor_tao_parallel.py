@@ -4,6 +4,7 @@ from multiprocessing import Pool
 import os
 import numpy as np
 import time
+from numba import jit
 
 import get_date as gd
 import select_rps as sr
@@ -104,7 +105,7 @@ if __name__ == '__main__':
 
     rps_N1 = 50
     stock_length = 500
-    current_process_date = 20200306
+    current_process_date = 202001007
     rps_N2 = 120
     rps_N3 = 250
     high_price_threshold = 0.9

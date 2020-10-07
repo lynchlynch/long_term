@@ -1,5 +1,6 @@
 import os
 import pandas as pd
+import numpy as np
 
 finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
 

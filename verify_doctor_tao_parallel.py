@@ -101,7 +101,7 @@ if __name__ == '__main__':
     weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
     # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-    # start_time = time.time()
+    start_time = time.time()
 
     rps_N1 = 50
     stock_length = 500
@@ -110,7 +110,8 @@ if __name__ == '__main__':
     rps_N3 = 250
     high_price_threshold = 0.9
     # rps_threshold_list = [85, 85, 85]
-    rps_threshold_list = [80, 80, 80]
+    rps_threshold_list = [70, 70, 70]
+    result_path = result_path + str(rps_threshold_list[0]) + '/'
 
     duration_month = 8
     duration_day = duration_month * 4 * 5
@@ -176,6 +177,9 @@ if __name__ == '__main__':
                     count_num += 1
 
     print(count_num/total_num)
+
+    buy_stock_log_df = pd.DataFrame(buy_stock_log, columns=['stock_code', 'buy_date'])
+    buy_stock_log_df.to_csv(result_path + 'buy_stock_log.csv')
 
     end_time = time.time()
     print('time elapse : ' + str(end_time-start_time))

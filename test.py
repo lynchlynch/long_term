@@ -1,17 +1,6 @@
-import numpy
-from numba import njit
-import timeit
+import pandas as pd
 
-def do_trig(x, y):
-    z = numpy.empty_like(x)
-    for i in range(x.shape[0]):
-        for j in range(x.shape[1]):
-            z[i, j] = numpy.sin(x[i, j]**2) + numpy.cos(y[i, j])
-    return z
+a = [['a', '1.2', '4.2'], ['b', '70', '0.03'], ['x', '5', '0']]
 
-x = numpy.random.random((1000, 1000))
-y = numpy.random.random((1000, 1000))
-
-# do_trig(x, y)
-t1 = timeit.timeit('do_trig(x, y)','from __main__ import do_trig')
-print(t1)
+df = pd.DataFrame(a, columns=['one', 'two', 'three'])
+print(df)

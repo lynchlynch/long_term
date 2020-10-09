@@ -1,6 +1,9 @@
 import pandas as pd
 
-a = [['a', '1.2', '4.2'], ['b', '70', '0.03'], ['x', '5', '0']]
+result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/' + str(70) + '/'
 
-df = pd.DataFrame(a, columns=['one', 'two', 'three'])
-print(df)
+stock_data = pd.read_csv(result_path + '/raw/20140103.csv')
+print(type(stock_data['date'].tolist()[0]))
+a = stock_data['date'].tolist()[0]
+print(a)
+print(a%2000)

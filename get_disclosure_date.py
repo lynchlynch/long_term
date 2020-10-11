@@ -12,6 +12,7 @@ year_list = [str(i) for i in year_list]
 end_quater_list = ['0331','0630','0930','1231']
 for single_year in year_list:
     for single_quater in end_quater_list:
+        print(str(single_year) + '-----------' + str(single_quater))
         end_date = single_year + single_quater
         df = pro.disclosure_date(end_date = end_date)
         df.to_csv(disclosure_result_path + end_date + '.csv',index=False)
@@ -28,4 +29,10 @@ for single_file in disclosure_file_list:
     single_disclosure_data = pd.read_csv(disclosure_result_path + single_file)
     total_disclosure_df = total_disclosure_df.append(single_disclosure_data)
 
+code_list = []
+for index in range(len(total_disclosure_df)):
+    code = int((total_disclosure_df['ts_code'].tolist()[index]).split('.')[0])
+    code_list.append(code)
+
+total_disclosure_df['stock_code'] = code_list
 total_disclosure_df.to_csv(disclosure_result_path + 'total_disclosure.csv',index=False)

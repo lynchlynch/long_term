@@ -105,7 +105,7 @@ if __name__ == '__main__':
 
     rps_N1 = 50
     stock_length = 500
-    current_process_date = 202001007
+    # current_process_date = 202001007
     rps_N2 = 120
     rps_N3 = 250
     high_price_threshold = 0.9
@@ -128,7 +128,7 @@ if __name__ == '__main__':
     weekly_file_list = os.listdir(weekly_stock_path)
 
     p = Pool(processes=10)
-    for week_index in list(range(len(week_list)))[51:]:
+    for week_index in list(range(len(week_list)))[52:]:
         # get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,
         #                    rps_N2,rps_N3,stock_length,high_price_threshold,rps_threshold_list,weekly_file_list)
         p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,

@@ -110,7 +110,7 @@ if __name__ == '__main__':
     rps_N3 = 250
     high_price_threshold = 0.9
     # rps_threshold_list = [85, 85, 85]
-    rps_threshold_list = [70, 70, 70]
+    rps_threshold_list = [80, 80, 80]
     result_path = result_path + str(rps_threshold_list[0]) + '/'
 
     duration_month = 8

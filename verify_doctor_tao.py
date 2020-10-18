@@ -59,7 +59,7 @@ for week_index in list(range(len(week_list)))[52:]:
     week_date_list = gd.get_week_date_list(week_start_date,week_end_date,daily_stock_path)
     weekly_selected_stock_list = []
     for single_date in week_date_list:
-        total_stock_list = []
+        # total_stock_list = []#10.18
         current_process_date = single_date
         print('current_process_date ： ' + str(current_process_date))
         rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
@@ -88,11 +88,11 @@ for week_index in list(range(len(week_list)))[52:]:
 
     #验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
+    total_stock_list = []#10.18
     for single_code in weekly_code_list:
         print(single_code)
-        # print(week_end_date)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
-        single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
+        single_stock_week_data = pd.read_csv(weekly_stock_path + zeroize.zeroize(single_code) + '.csv')
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data,week_end_date)
         print(buy_observe_first_week)
         if type(buy_observe_first_week) == int:

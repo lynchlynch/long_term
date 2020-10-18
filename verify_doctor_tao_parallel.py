@@ -22,7 +22,7 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
     week_date_list = gd.get_week_date_list(week_start_date, week_end_date, daily_stock_path)
     weekly_selected_stock_list = []
     for single_date in week_date_list:
-        total_stock_list = []
+        # total_stock_list = []#10.18
         current_process_date = single_date
         print(str(week_end_date) + '-------------------' + 'current_process_date ： ' + str(current_process_date))
         rps_df, rps_df_above_theshold = sr.rps_sorted(daily_stock_path, rps_N1, stock_length, current_process_date)
@@ -53,10 +53,11 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
     # print(weekly_selected_stock_list)
     # 验证在十周线下买进
     weekly_code_list = list(set(weekly_selected_stock_df['code'].tolist()))
+    total_stock_list = []  # 10.18
     for single_code in weekly_code_list:
         # print(single_code)
         single_stock_data = pd.read_csv(daily_stock_path + zeroize.zeroize(single_code) + '.csv')
-        single_stock_week_data = pd.read_csv(weekly_stock_path + single_code + '.csv')
+        single_stock_week_data = pd.read_csv(weekly_stock_path + zeroize.zeroize(single_code) + '.csv')
         # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data, week_end_date)
         buy_date_monday = gd.get_buy_date_10(single_stock_data, single_stock_week_data, buy_observe_first_week)
@@ -79,11 +80,15 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
                                   buy_date_index_daily:len(single_stock_data)].index(highest_price)
                 sell_date = single_stock_data['trade_date'].tolist()[sell_date_index]
             increase_rate = (highest_price - buy_price) / buy_price
+            '''
             if len([single_code, buy_date_monday, sell_date, sell_date_index - buy_date_index_daily,
                     buy_price, highest_price, increase_rate]) != 0:
                 total_stock_list.append(
                     [single_code, buy_date_monday, sell_date, sell_date_index - buy_date_index_daily,
                      buy_price, highest_price, increase_rate])
+            '''
+        total_stock_list.append([single_code, buy_date_monday, sell_date, sell_date_index - buy_date_index_daily,
+                                 buy_price, highest_price, increase_rate])
 
     total_stock_df = pd.DataFrame(total_stock_list, columns=['code', 'buy_date', 'sell_date', 'duration(day)',
                                                              'buy_price', 'sell_price', 'increase_rate'])

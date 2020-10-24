@@ -163,13 +163,15 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
                     highest_price = max(single_stock_data['high'].tolist()
                                         [buy_date_index_daily:(buy_date_index_daily + duration_day)])
                     sell_date_index = single_stock_data['high'].tolist()[
-                                      buy_date_index_daily:(buy_date_index_daily + duration_day)].index(highest_price)
+                                      buy_date_index_daily:(buy_date_index_daily + duration_day)].\
+                                          index(highest_price) + buy_date_index_daily
                     sell_date = single_stock_data['trade_date'].tolist()[sell_date_index]
                 else:
                     highest_price = max(single_stock_data['high'].tolist()
                                         [buy_date_index_daily:len(single_stock_data)])
                     sell_date_index = single_stock_data['high'].tolist()[
-                                      buy_date_index_daily:len(single_stock_data)].index(highest_price)
+                                      buy_date_index_daily:len(single_stock_data)].index(highest_price) \
+                                      + buy_date_index_daily
                     sell_date = single_stock_data['trade_date'].tolist()[sell_date_index]
                 increase_rate = (highest_price - buy_price) / buy_price
                 '''

@@ -2,13 +2,13 @@ import os
 import pandas as pd
 import numpy as np
 
-finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+# finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+def C_rule(finance_data_path,stock_code):
+    file_list = os.listdir(finance_data_path)
 
-file_list = os.listdir(finance_data_path)
-
-for single_file in file_list:
-    print('--------------'+single_file+'----------------')
-    stock_data = pd.read_csv(finance_data_path + single_file)
+    # for single_file in file_list:
+    print('--------------'+stock_code+'----------------')
+    stock_data = pd.read_csv(finance_data_path + stock_code + '.csv')
     eps_yoy_list = stock_data['basic_eps_yoy'].tolist()
     eps_current = eps_yoy_list[0]
     eps_pre_1 = eps_yoy_list[1]

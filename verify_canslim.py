@@ -27,7 +27,7 @@ for index in range(len(buy_date_log)):
         new_stock_code = zeroize.zeroize(buy_date_log['stock_code'].tolist()[index])
         new_buy_date = str(int(buy_date_log['buy_date'].tolist()[index]))
         canslim_verify_df = canslim_verify_df.append([{'stock_code':new_stock_code,'buy_date':new_buy_date}])
-        c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code)
+        c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code,new_buy_date)
         c_rule_list.append(c_rule_result)
     '''
     stock_code_list.append(zeroize.zeroize(buy_date_log['stock_code'].tolist()[index]))

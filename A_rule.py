@@ -9,6 +9,7 @@ file_list = os.listdir(finance_data_path)
 for single_file in file_list:
     print('--------------'+single_file+'----------------')
     stock_data = pd.read_csv(finance_data_path + single_file)
+    print(stock_data)
     eps_yoy_list = stock_data['basic_eps_yoy'].tolist()
     eps_current = eps_yoy_list[0]
     eps_pre_1 = eps_yoy_list[1]

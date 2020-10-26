@@ -1,12 +1,16 @@
 import pandas as pd
 import os
 
-# finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+# import
+
 def C_rule(finance_data_path,stock_code):
-    # for single_file in file_list:
+    disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
+    disclosure_result_data = pd.read_csv(disclosure_result_path + 'total_disclosure.csv')
+    # report_date = disclosure_result_data[(disclosure_result_data['stock_code'] == int(stock_code)) and ]
     # print('--------------'+stock_code+'----------------')
     if os.path.exists(finance_data_path + stock_code + '.csv'):
         stock_data = pd.read_csv(finance_data_path + stock_code + '.csv')
+        print(stock_data)
         eps_yoy_list = stock_data['basic_eps_yoy'].tolist()
         eps_current = eps_yoy_list[0]
         eps_pre_1 = eps_yoy_list[1]

@@ -4,7 +4,8 @@ import pandas as pd
 from tqdm import tqdm
 import numba as nba
 
-disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
+# disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
+disclosure_result_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/disclosure_date/'
 
 ts.set_token('d34c57b1749de7df7766a60bb615078696e935856d99575c6b91bb5d')
 pro = ts.pro_api('d34c57b1749de7df7766a60bb615078696e935856d99575c6b91bb5d')

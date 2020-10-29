@@ -34,11 +34,12 @@ for single_file in disclosure_file_list:
 total_disclosure_df = total_disclosure_df.reset_index(drop=True)
 
 total_disclosure_df.to_csv(disclosure_result_path + 'total_disclosure_111.csv',index=False)
-
+total_disclosure_df.dropna(axis=0,inplace=True)
 code_list = []
 for index in tqdm(range(len(total_disclosure_df)),desc='index'):
     code = int((total_disclosure_df['ts_code'].tolist()[index]).split('.')[0])
     code_list.append(code)
+    '''
     pre_date = total_disclosure_df.loc[index,'pre_date']
     if len(str(pre_date)) < 5:#处理空值的情况
         pre_date = 0xfff
@@ -49,5 +50,7 @@ for index in tqdm(range(len(total_disclosure_df)),desc='index'):
 
     total_disclosure_df.loc[index,'pre_date'] = int(pre_date)
     total_disclosure_df.loc[index, 'actual_date'] = int(actual_date)
+'''
 total_disclosure_df['stock_code'] = code_list
+
 total_disclosure_df.to_csv(disclosure_result_path + 'total_disclosure.csv',index=False)

@@ -3,12 +3,18 @@ import os
 
 # import
 
-def C_rule(finance_data_path,stock_code):
+def C_rule(finance_data_path,stock_code,buy_date):
     disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
     disclosure_result_data = pd.read_csv(disclosure_result_path + 'total_disclosure.csv')
     # report_date = disclosure_result_data[(disclosure_result_data['stock_code'] == int(stock_code)) and ]
     # print('--------------'+stock_code+'----------------')
     if os.path.exists(finance_data_path + stock_code + '.csv'):
+        select_df = disclosure_result_data[disclosure_result_data['stock_code'] == stock_code]
+        select_df = select_df.reset_index(drop=True)
+        for index in range(len(select_df)-1):
+            if (select_df['ann_date'].tolist()[index] < buy_date) and (select_df['ann_date'].tolist()[index+1] >= buy_date):
+                end_date = select_df['end_date'].tolist()[index]
+                break
         stock_data = pd.read_csv(finance_data_path + stock_code + '.csv')
         print(stock_data)
         eps_yoy_list = stock_data['basic_eps_yoy'].tolist()

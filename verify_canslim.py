@@ -4,15 +4,16 @@ import math
 import zeroize
 import C_rule
 
-daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-# stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
-report_path = 'D:/pydir/Raw Data/Report/PerReport'
-# report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
-result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-# result_path = '/Users/pei/PycharmProjects/docter_tao/result'
-weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-# weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
-finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+# daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+# report_path = 'D:/pydir/Raw Data/Report/PerReport'
+report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
+# result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+result_path = '/Users/pei/PycharmProjects/docter_tao/result'
+# weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+# finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+finance_data_path = '/Users/pei/Raw Data/Tushare_pro/finance_data/'
 
 rps_threshold_list = [70, 70, 70]
 result_path = result_path + str(rps_threshold_list[0]) + '/'
@@ -27,6 +28,7 @@ for index in range(len(buy_date_log)):
         new_stock_code = zeroize.zeroize(buy_date_log['stock_code'].tolist()[index])
         new_buy_date = str(int(buy_date_log['buy_date'].tolist()[index]))
         canslim_verify_df = canslim_verify_df.append([{'stock_code':new_stock_code,'buy_date':new_buy_date}])
+
         c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code,new_buy_date)
         c_rule_list.append(c_rule_result)
     '''

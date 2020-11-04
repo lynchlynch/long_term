@@ -210,7 +210,7 @@ if __name__ == '__main__':
     rps_N3 = 250
     high_price_threshold = 0.9
     # rps_threshold_list = [85, 85, 85]
-    rps_threshold_list = [85, 85, 85]
+    rps_threshold_list = [88, 88, 88]
     result_path = result_path + str(rps_threshold_list[0]) + '/'
 
     duration_month = 8
@@ -280,6 +280,9 @@ if __name__ == '__main__':
 
     buy_stock_log_df = pd.DataFrame(buy_stock_log, columns=['stock_code', 'buy_date'])
     buy_stock_log_df.to_csv(result_path + 'buy_stock_log.csv')
+
+    # print(total_num)
+    print(count_num/(total_num-buy_stock_log_df['buy_date'].isnull().sum()))
 
     end_time = time.time()
     print('time elapse : ' + str(end_time-start_time))

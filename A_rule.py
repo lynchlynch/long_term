@@ -34,14 +34,26 @@ def A_rule(finance_data_path,stock_code,buy_date):
 
         #收益增长率25-50
         if (eps_current > 25) and eps_pre_1 > 25 and eps_pre_2 > 25:
-            satisfy_c_rule = 'True'
+            satisfy_a_rule_eps = 'True'
         else:
-            satisfy_c_rule = 'False'
+            satisfy_a_rule_eps = 'False'
 
         #股本回报率
+        eps_yoy_list = stock_finance_data['roe'].tolist()
+        roe_1 = eps_yoy_list[year_date_1_index]
+        roe_2 = eps_yoy_list[year_date_2_index]
+        roe_3 = eps_yoy_list[year_date_3_index]
+        if roe_1 > 17 and roe_2 > 17 and roe_3 > 17:
+            satisfy_a_rule_roe = 'True'
+        else:
+            satisfy_a_rule_roe = 'False'
 
+        if satisfy_a_rule_eps == 'True' and satisfy_a_rule_roe == 'True':
+            satisfy_a_rule = 'True'
+        else:
+            satisfy_a_rule = 'False'
     else:
-        satisfy_c_rule = 'N'
+        satisfy_a_rule = 'N'
 
-    return satisfy_c_rule
+    return satisfy_a_rule
 

@@ -4,6 +4,7 @@ from tqdm import tqdm
 
 import zeroize
 import C_rule
+import A_rule
 
 daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
 # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
@@ -34,6 +35,10 @@ for index in range(len(buy_date_log))[:100]:
         ############# C Rule###########################
         c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code,new_buy_date)
         c_rule_list.append(c_rule_result)
+
+        ############# A Rule###########################
+        a_rule_result = A_rule.A_rule(finance_data_path, new_stock_code, new_buy_date)
+        a_rule_list.append(c_rule_result)
         # if c_rule_result == 'True':
         #     print(c_rule_result)
         #     true_num = true_num+1
@@ -50,7 +55,10 @@ buy_date_log.drop(['stock_code','buy_date'],axis=1)
 buy_date_log['stock_code'] = stock_code_list
 buy_date_log['buy_date'] = buy_date_list
 '''
+canslim_verify_df['C_rule'] = c_rule_list
+canslim_verify_df['A_rule'] = a_rule_list
 canslim_verify_df = canslim_verify_df.reset_index(drop=True)
+canslim_verify_df.to_csv(result_path + 'canslim_verify_result.csv')
 print(canslim_verify_df)
 
 

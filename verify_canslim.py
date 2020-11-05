@@ -26,7 +26,7 @@ a_rule_list = []
 canslim_verify_df = pd.DataFrame([],columns=['stock_code','buy_date'])
 # true_num = 0
 # for index in tqdm(range(len(buy_date_log))[:100],desc='processing'):
-for index in range(len(buy_date_log))[:100]:
+for index in range(len(buy_date_log)):
     print('--------------' +str(index) + '-------------------------')
     if math.isnan(buy_date_log['buy_date'].tolist()[index]) == False:
         new_stock_code = zeroize.zeroize(buy_date_log['stock_code'].tolist()[index])
@@ -59,6 +59,8 @@ canslim_verify_df['C_rule'] = c_rule_list
 canslim_verify_df['A_rule'] = a_rule_list
 canslim_verify_df = canslim_verify_df.reset_index(drop=True)
 canslim_verify_df.to_csv(result_path + 'canslim_verify_result.csv')
+
+
 print(canslim_verify_df)
 
 

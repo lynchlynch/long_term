@@ -16,6 +16,10 @@ weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
 
+duration_month = 8
+duration_day = duration_month * 4 * 5
+target_rate = 0.5
+
 rps_threshold_list = [70, 70, 70]
 result_path = result_path + str(rps_threshold_list[0]) + '/'
 
@@ -59,8 +63,25 @@ canslim_verify_df['C_rule'] = c_rule_list
 canslim_verify_df['A_rule'] = a_rule_list
 canslim_verify_df = canslim_verify_df.reset_index(drop=True)
 canslim_verify_df.to_csv(result_path + 'canslim_verify_result.csv')
-
-
+satisfy_c_a_df = canslim_verify_df[(canslim_verify_df['C_rule'] == 'True') & (canslim_verify_df['A_rule'] == 'True')]
+satisfy_num = 0
 print(canslim_verify_df)
+print(satisfy_c_a_df)
+for index in range(len(satisfy_c_a_df)):
+    stock_code = satisfy_c_a_df['stock_code'].tolist()[index]
+    buy_date = satisfy_c_a_df['buy_date'].tolist()[index]
+    stock_data = pd.read_csv(daily_stock_path + stock_code + '.csv')
+    buy_date_index = stock_data['trade_date'].tolist().index(buy_date)
+    buy_price = stock_data['high'].tolist()[buy_date_index]
+    if (buy_date_index + duration_day+1) >= len(stock_data):
+        high_price = max(stock_data['high'].tolist()[buy_date_index+1:buy_date_index+duration_day+1])
+    else:
+        high_price = max(stock_data['high'].tolist()[buy_date_index + 1:])
+
+    increase_rate = (high_price - buy_price) / buy_price
+    if increase_rate > 0.5:
+        satisfy_num += 1
+
+print('satisfy_rate = ' + str(satisfy_num/len(satisfy_c_a_df)))
 
 

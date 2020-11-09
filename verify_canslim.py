@@ -12,10 +12,13 @@ stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
 # report_path = 'D:/pydir/Raw Data/Report/PerReport'
 report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
 # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-result_path = '/Users/pei/long_term/veri_result/veri_doctor_tao'
+result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
 # weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 # finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+finance_data_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/finance_data/'
+# disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
+disclosure_result_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/disclosure_date/'
 
 duration_month = 8
 duration_day = duration_month * 4 * 5
@@ -39,11 +42,11 @@ if os.path.exists(result_path + 'canslim_verify_result.csv') == False:
             new_buy_date = str(int(buy_date_log['buy_date'].tolist()[index]))
             canslim_verify_df = canslim_verify_df.append([{'stock_code':new_stock_code,'buy_date':new_buy_date}])
             ############# C Rule###########################
-            c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code,new_buy_date)
+            c_rule_result = C_rule.C_rule(finance_data_path,new_stock_code,new_buy_date,disclosure_result_path)
             c_rule_list.append(c_rule_result)
 
             ############# A Rule###########################
-            a_rule_result = A_rule.A_rule(finance_data_path, new_stock_code, new_buy_date)
+            a_rule_result = A_rule.A_rule(finance_data_path, new_stock_code, new_buy_date,disclosure_result_path)
             a_rule_list.append(c_rule_result)
             # if c_rule_result == 'True':
             #     print(c_rule_result)

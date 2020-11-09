@@ -3,8 +3,8 @@ import os
 
 # import
 
-def A_rule(finance_data_path,stock_code,buy_date):
-    disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
+def A_rule(finance_data_path,stock_code,buy_date,disclosure_result_path):
+    # disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
     disclosure_result_data = pd.read_csv(disclosure_result_path + 'total_disclosure.csv')
     # report_date = disclosure_result_data[(disclosure_result_data['stock_code'] == int(stock_code)) and ]
     # print('--------------'+stock_code+'----------------')

@@ -31,7 +31,7 @@ def C_rule(finance_data_path,stock_code,buy_date):
         diff_eps_1 = eps_pre_1 - eps_pre_2
         diff_eps_2 = eps_pre_2 - eps_pre_3
 
-        if (eps_current > 0.4) and (diff_eps_current - diff_eps_1) > 0 and (diff_eps_1-diff_eps_2) > 0:
+        if (eps_current > 40) and (diff_eps_current - diff_eps_1) > 0 and (diff_eps_1-diff_eps_2) > 0:
             satisfy_c_rule = 'True'
             # print('True')
         else:

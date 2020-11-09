@@ -68,7 +68,10 @@ if os.path.exists(result_path + 'canslim_verify_result.csv') == False:
 
 canslim_verify_df = pd.read_csv(result_path + 'canslim_verify_result.csv')
 satisfy_c_a_df = canslim_verify_df[(canslim_verify_df['C_rule'] == 'True') & (canslim_verify_df['A_rule'] == 'True')]
+print(len(satisfy_c_a_df))
 satisfy_num = 0
+
+satisfy_canslim_df = pd.DataFrame([])
 
 for index in range(len(satisfy_c_a_df)):
     stock_code = satisfy_c_a_df['stock_code'].tolist()[index]
@@ -82,14 +85,18 @@ for index in range(len(satisfy_c_a_df)):
     #       '-----------' + str(len(stock_data)))
     if (buy_date_index + duration_day+1) < len(stock_data):
         high_price = max(stock_data['high'].tolist()[buy_date_index+1:buy_date_index+duration_day+1])
-        print(str(stock_code) + '-------' + str(buy_date) + '-----------' + str(high_price))
+        # print(str(stock_code) + '-------' + str(buy_date) + '-----------' + str(high_price))
     else:
         high_price = max(stock_data['high'].tolist()[buy_date_index + 1:])
 
     increase_rate = (high_price - buy_price) / buy_price
+    print(increase_rate)
     if increase_rate > 0.5:
         satisfy_num += 1
+        # satisfy_canslim_df = satisfy_canslim_df.append([{'stock_code':zeroize.zeroize(stock_code),'buy_date':buy_date,
+        #                                                  'increase':increase_rate}])
 
+satisfy_canslim_df.to_csv(result_path + 'satisfy_canslim.csv')
 print('satisfy_rate = ' + str(satisfy_num/len(satisfy_c_a_df)))
 
 

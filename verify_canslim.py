@@ -8,7 +8,7 @@ import C_rule
 import A_rule
 
 # daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+daily_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
 # report_path = 'D:/pydir/Raw Data/Report/PerReport'
 report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
 # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'

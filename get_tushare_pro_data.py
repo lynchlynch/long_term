@@ -17,7 +17,7 @@ root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
 
 # start_date = '20171009'
 start_date = '20121009'
-current_day = '20201026'
+current_day = '20201109'
 
 start_time = time.time()
 #分组下载数据

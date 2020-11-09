@@ -7,15 +7,15 @@ import zeroize
 import C_rule
 import A_rule
 
-daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-# stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
-report_path = 'D:/pydir/Raw Data/Report/PerReport'
-# report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
-result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-# result_path = '/Users/pei/PycharmProjects/docter_tao/result'
-weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-# weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
-finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
+# daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+# report_path = 'D:/pydir/Raw Data/Report/PerReport'
+report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
+# result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+result_path = '/Users/pei/long_term/veri_result/veri_doctor_tao'
+# weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+# finance_data_path = 'D:/pydir/Raw Data/Tushare_pro/finance_data/'
 
 duration_month = 8
 duration_day = duration_month * 4 * 5

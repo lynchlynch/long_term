@@ -24,7 +24,7 @@ duration_month = 8
 duration_day = duration_month * 4 * 5
 target_rate = 0.5
 
-rps_threshold_list = [95, 95, 95]
+rps_threshold_list = [90, 90, 90]
 result_path = result_path + str(rps_threshold_list[0]) + '/'
 
 buy_date_log = pd.read_csv(result_path + 'buy_stock_log.csv')
@@ -34,9 +34,9 @@ a_rule_list = []
 canslim_verify_df = pd.DataFrame([],columns=['stock_code','buy_date'])
 
 if os.path.exists(result_path + 'canslim_verify_result.csv') == False:
-    for index in tqdm(range(len(buy_date_log))[:100],desc='processing'):
+    for index in tqdm(range(len(buy_date_log)),desc='processing'):
     # for index in range(len(buy_date_log)):
-        # print('--------------' +str(index) + '-------------------------')
+    #     print('--------------' +str(index) + '-------------------------')
         if math.isnan(buy_date_log['buy_date'].tolist()[index]) == False:
             new_stock_code = zeroize.zeroize(buy_date_log['stock_code'].tolist()[index])
             new_buy_date = str(int(buy_date_log['buy_date'].tolist()[index]))

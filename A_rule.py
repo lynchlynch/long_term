@@ -43,7 +43,8 @@ def A_rule(finance_data_path,stock_code,buy_date,disclosure_result_path):
         roe_1 = eps_yoy_list[year_date_1_index]
         roe_2 = eps_yoy_list[year_date_2_index]
         roe_3 = eps_yoy_list[year_date_3_index]
-        if roe_1 > 17 and roe_2 > 17 and roe_3 > 17:
+        # if roe_1 > 17 and roe_2 > 17 and roe_3 > 17:
+        if roe_1 > 27 and roe_2 > 27 and roe_3 > 27:
             satisfy_a_rule_roe = 'True'
         else:
             satisfy_a_rule_roe = 'False'

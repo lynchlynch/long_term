@@ -22,9 +22,9 @@ disclosure_result_path = 'D:/pydir/Raw Data/Tushare_pro/disclosure_date/'
 
 duration_month = 8
 duration_day = duration_month * 4 * 5
-target_rate = 0.5
+target_rate = 0.4
 
-rps_threshold_list = [90, 90, 90]
+rps_threshold_list = [85, 85, 85]
 result_path = result_path + str(rps_threshold_list[0]) + '/'
 
 buy_date_log = pd.read_csv(result_path + 'buy_stock_log.csv')
@@ -71,7 +71,7 @@ if os.path.exists(result_path + 'canslim_verify_result.csv') == False:
 
 canslim_verify_df = pd.read_csv(result_path + 'canslim_verify_result.csv')
 satisfy_c_a_df = canslim_verify_df[(canslim_verify_df['C_rule'] == 'True') & (canslim_verify_df['A_rule'] == 'True')]
-print(len(satisfy_c_a_df))
+# print(len(satisfy_c_a_df))
 satisfy_num = 0
 
 satisfy_canslim_df = pd.DataFrame([])
@@ -93,7 +93,8 @@ for index in range(len(satisfy_c_a_df)):
         high_price = max(stock_data['high'].tolist()[buy_date_index + 1:])
 
     increase_rate = (high_price - buy_price) / buy_price
-    print(increase_rate)
+    satisfy_canslim_df = satisfy_canslim_df.append([{'stock_code':zeroize.zeroize(stock_code),'buy_date':buy_date,
+                                                     'increase':increase_rate}])
     if increase_rate > 0.5:
         satisfy_num += 1
         # satisfy_canslim_df = satisfy_canslim_df.append([{'stock_code':zeroize.zeroize(stock_code),'buy_date':buy_date,

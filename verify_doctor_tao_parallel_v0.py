@@ -104,14 +104,14 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
 if __name__ == '__main__':
     start_time = time.time()
 
-    daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-    # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
-    report_path = 'D:/pydir/Raw Data/Report/PerReport'
-    # report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
-    result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-    # result_path = '/Users/pei/PycharmProjects/docter_tao/result'
-    weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-    # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+    # daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+    stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+    # report_path = 'D:/pydir/Raw Data/Report/PerReport'
+    report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
+    # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+    result_path = '/Users/pei/PycharmProjects/docter_tao/result'
+    # weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+    weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
     start_time = time.time()
 

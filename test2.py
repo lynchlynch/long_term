@@ -4,8 +4,10 @@ from cycler import cycler# 用于定制线条颜色
 import pandas as pd# 导入DataFrame数据
 import matplotlib.pyplot as plt
 
-daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+# daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+daily_stock_path = '/Users/Pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+# result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+result_path = '/Users/Pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
 
 def import_csv(stock_code):
     # 导入股票数据
@@ -26,7 +28,7 @@ def import_csv(stock_code):
 
 # 导入数据
 symbol = '000001'
-period = 100
+period = 1000
 df = import_csv(symbol)[-period:]
 print(df.columns)
 
@@ -42,7 +44,7 @@ print(df.columns)
 # figscale:设置图形尺寸(数值越大图像质量越高)
 kwargs = dict(
     type='candle',
-    mav=(7, 30, 60),
+    mav=(5, 20, 30,60,120,250),
     volume=True,
     title='\nA_stock %s candle_line' % (symbol),
     ylabel='OHLC Candles',
@@ -94,5 +96,5 @@ mpf.plot(df,
          style=s,
          show_nontrading=False,
          savefig=result_path + 'A_stock-%s %s_candle_line'
-                 % (symbol, period) + '.jpg')
+                 % (symbol, period) + '.png')
 plt.show()

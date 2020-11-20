@@ -40,7 +40,8 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,end_date):
     # 导入数据
     symbol = stock_code
     # period = 1000
-    df = import_csv(daily_stock_path,symbol)[-period:]
+    # df = import_csv(daily_stock_path,symbol)[-period:]
+    df = import_csv(daily_stock_path, symbol)
     start_date_index = date_index(df['Date'].tolist(),start_date)
     end_date_index = date_index(df['Date'].tolist(), end_date)
     df = import_csv(daily_stock_path, symbol)[start_date_index:end_date_index+1]

@@ -21,17 +21,29 @@ def import_csv(daily_stock_path,stock_code):
     df.set_index(['Date'], inplace=True)
     return df
 
-def draw_k_line(daily_stock_path,result_path):
+#返回日期所在的index
+def date_index(date_list,date):
+    if date in date_list:
+        date_index = date_list.index(date)
+    else:
+        for index in range(len(date_list)-1):
+            if date_list[index] < date and date_list[index+1] > date:
+                date_index = index
+    return date_index
+
+def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,end_date):
     # daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
     # daily_stock_path = '/Users/Pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
     # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
     # result_path = '/Users/Pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
 
     # 导入数据
-    symbol = '000001'
-    period = 1000
-    df = import_csv(symbol)[-period:]
-    print(df.columns)
+    symbol = stock_code
+    # period = 1000
+    df = import_csv(daily_stock_path,symbol)[-period:]
+    start_date_index = date_index(df['Date'].tolist(),start_date)
+    end_date_index = date_index(df['Date'].tolist(), end_date)
+    df = import_csv(daily_stock_path, symbol)[start_date_index:end_date_index+1]
 
     # 设置基本参数
     # type:绘制图形的类型,有candle, renko, ohlc, line等
@@ -96,6 +108,5 @@ def draw_k_line(daily_stock_path,result_path):
              **kwargs,
              style=s,
              show_nontrading=False,
-             savefig=result_path + 'A_stock-%s %s_candle_line'
-                     % (symbol, period) + '.png')
+             savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '---' + str(end_date) + '.png')
     plt.show()

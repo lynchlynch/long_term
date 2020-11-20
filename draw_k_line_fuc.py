@@ -9,12 +9,19 @@ def import_csv(daily_stock_path,stock_code):
     # 导入股票数据
     df = pd.read_csv(daily_stock_path + stock_code + '.csv')
     # 格式化列名，用于之后的绘制
+    # df.rename(
+    #     columns={
+    #         'trade_date': 'Date', 'open': 'Open',
+    #         'high': 'High', 'low': 'Low',
+    #         'close': 'Close', 'vol': 'Volume'},
+    #     inplace=True)
     df.rename(
         columns={
-            'trade_date': 'Date', 'open': 'Open',
-            'high': 'High', 'low': 'Low',
+            'open': 'Open','high': 'High', 'low': 'Low',
             'close': 'Close', 'vol': 'Volume'},
         inplace=True)
+    df['Date'] = df['trade_date'].tolist()
+
     # 转换为日期格式
     df['Date'] = pd.to_datetime(df['Date'])
     # 将日期列作为行索引
@@ -31,7 +38,7 @@ def date_index(date_list,date):
                 date_index = index
     return date_index
 
-def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,end_date):
+def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,period_post):
     # daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
     # daily_stock_path = '/Users/Pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
     # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
@@ -42,9 +49,16 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,end_date):
     # period = 1000
     # df = import_csv(daily_stock_path,symbol)[-period:]
     df = import_csv(daily_stock_path, symbol)
-    start_date_index = date_index(df['Date'].tolist(),start_date)
-    end_date_index = date_index(df['Date'].tolist(), end_date)
-    df = import_csv(daily_stock_path, symbol)[start_date_index:end_date_index+1]
+    start_date_index = date_index(df['trade_date'].tolist(),start_date)
+    if start_date_index > period_pre:
+        sindex = start_date_index - period_pre
+    else:
+        sindex = 0
+    if start_date_index + period_post < len(df):
+        eindex = start_date_index + period_post
+    else:
+        eindex = len(df)-1
+    df = import_csv(daily_stock_path, symbol)[sindex:eindex]
 
     # 设置基本参数
     # type:绘制图形的类型,有candle, renko, ohlc, line等
@@ -109,5 +123,5 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,end_date):
              **kwargs,
              style=s,
              show_nontrading=False,
-             savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '---' + str(end_date) + '.png')
+             savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '.png')
     plt.show()

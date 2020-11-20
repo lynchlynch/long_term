@@ -10,4 +10,5 @@ result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
 weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-
+rps = 85
+to_draw_file = 'buy_stock_log.csv'

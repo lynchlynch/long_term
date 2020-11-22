@@ -46,8 +46,6 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
 
     # 导入数据
     symbol = stock_code
-    # period = 1000
-    # df = import_csv(daily_stock_path,symbol)[-period:]
     df = import_csv(daily_stock_path, symbol)
     start_date_index = date_index(df['trade_date'].tolist(),start_date)
     if start_date_index > period_pre:
@@ -78,7 +76,7 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
         ylabel='OHLC Candles',
         ylabel_lower='Shares\nTraded Volume',
         figratio=(15, 10),
-        figscale=5)
+        figscale=15)
 
     # 设置marketcolors
     # up:设置K线线柱颜色，up意为收盘价大于等于开盘价

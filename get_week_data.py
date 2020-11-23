@@ -16,7 +16,7 @@ root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 # root_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 
 # start_date = '20171009'
-start_date = '20111009'
+start_date = '20081009'
 current_day = '20201109'
 
 start_time = time.time()

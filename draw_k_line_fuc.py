@@ -56,7 +56,8 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
         eindex = start_date_index + period_post
     else:
         eindex = len(df)-1
-    df = import_csv(daily_stock_path, symbol)[sindex:eindex]
+    df = import_csv(daily_stock_path, symbol)[sindex:eindex+1]
+    print(str(symbol) + '-------' + str(len(df)))
 
     # 设置基本参数
     # type:绘制图形的类型,有candle, renko, ohlc, line等
@@ -122,4 +123,5 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
              style=s,
              show_nontrading=False,
              savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '.png')
-    plt.show()
+    # plt.plot()
+    # plt.show()

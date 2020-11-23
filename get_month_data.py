@@ -12,12 +12,12 @@ leap = 5#设置每组股票数
 groups = list(range(0,len(stock_code)//leap + 1))#分组
 no_data_stocks = []#储存无数据股票代码，以便重新下载
 download_failed_stocks = []
-root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+root_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/monthly_data/'
 # root_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 
 # start_date = '20171009'
-start_date = '20111009'
-current_day = '20201109'
+start_date = '20081009'
+current_day = '20201123'
 
 start_time = time.time()
 
@@ -27,12 +27,13 @@ for group in tqdm(groups,desc='group'):
         try:
             single_stock_data = ts.pro_bar\
                 (ts_code=stock_code_index, adj='qfq', start_date=start_date,end_date=current_day,
-                 ma=[5, 10, 20, 30, 50, 60, 120, 250],freq='W')
+                 ma=[5, 20, 30, 60, 120, 250],freq='M')
             single_stock_data.sort_values(by='trade_date',axis = 0, ascending = True,inplace=True)
             single_stock_data = single_stock_data.reset_index(drop=True)
             # print(single_stock_data)
             single_stock_savepath = root_path + stock_code_index.split('.')[0] + '.csv'
             single_stock_data.to_csv(single_stock_savepath)
+            time.sleep(0.8)  # 每分钟最多访问80次，所以只能睡眠
 
         except AttributeError:
             download_failed_stocks.append(stock_code_index)

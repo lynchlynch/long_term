@@ -123,11 +123,17 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     # show_nontrading:是否显示非交易日，默认False
     # savefig:导出图片，填写文件名及后缀
     # buy_point = [period_pre,df['Open'].tolist()[period_pre]]
+    if 'daily' in fig_save_path:
+        k_type = 'd'
+    elif 'weekly' in fig_save_path:
+        k_type = 'w'
+    else:
+        k_type = 'm'
     mpf.plot(df,
              **kwargs,
              style=s,
              show_nontrading=False,
-             savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '.png')
+             savefig=fig_save_path + str(stock_code) + '##' + k_type + '##' + str(start_date) + '.png')
 
     # buy_point = [sindex+1,df['Open'].tolist()[sindex+1]]
     # print(buy_point)

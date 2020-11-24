@@ -57,7 +57,7 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     else:
         eindex = len(df)-1
     df = import_csv(daily_stock_path, symbol)[sindex:eindex+1]
-    print(str(symbol) + '-------' + str(len(df)))
+    # print(str(symbol) + '-------' + str(len(df)))
 
     # 设置基本参数
     # type:绘制图形的类型,有candle, renko, ohlc, line等
@@ -69,6 +69,10 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     # y_label_lower:设置成交量图一栏的标题
     # figratio:设置图形纵横比
     # figscale:设置图形尺寸(数值越大图像质量越高)
+    # buy_point = [period_pre,df['Open'].tolist()[period_pre]]
+    # buy_point = [0, df['Open'].tolist()[0]]
+    # # add_plot = mpf.make_addplot(buy_point)
+    # add_plot = mpf.make_addplot(buy_point, scatter=True, markersize=200, marker='s', color='r')
     kwargs = dict(
         type='candle',
         mav=(5, 20, 30, 60, 120, 250),
@@ -118,10 +122,16 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     # 图形绘制
     # show_nontrading:是否显示非交易日，默认False
     # savefig:导出图片，填写文件名及后缀
+    # buy_point = [period_pre,df['Open'].tolist()[period_pre]]
+    buy_point = [0,df['Open'].tolist()[0]]
+    # add_plot = mpf.make_addplot(buy_point)
     mpf.plot(df,
              **kwargs,
              style=s,
              show_nontrading=False,
              savefig=fig_save_path + str(stock_code) + '##' + str(start_date) + '.png')
-    # plt.plot()
+
+    # buy_point = [sindex+1,df['Open'].tolist()[sindex+1]]
+    # print(buy_point)
+    # mpf.make_addplot(buy_point,scatter=True,markersize=2000,marker='^', color='r')
     # plt.show()

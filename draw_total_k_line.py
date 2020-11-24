@@ -7,18 +7,18 @@ import os
 
 start_time = time.time()
 
-# daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-daily_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
-# weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
-# monthly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/monthly_data/'
-monthly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/monthly_data/'
-# report_path = 'D:/pydir/Raw Data/Report/PerReport'
-report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
-# result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
-# weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+# daily_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+# weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+monthly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/monthly_data/'
+# monthly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/monthly_data/'
+report_path = 'D:/pydir/Raw Data/Report/PerReport'
+# report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
+result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+# result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
+weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+# weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
 rps = 95
 period_pre_daily = 500

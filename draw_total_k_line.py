@@ -3,6 +3,7 @@ import draw_k_line_fuc
 import zeroize
 import time
 from tqdm import tqdm
+import os
 
 start_time = time.time()
 
@@ -19,7 +20,7 @@ result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/
 # weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
 weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-rps = 85
+rps = 95
 period_pre_daily = 500
 period_post_daily = 250
 period_pre_weekly = 100
@@ -38,15 +39,18 @@ for index in tqdm(range(len(to_draw_file_df)),desc='index'):
     single_stock_code = to_draw_file_df['stock_code'].tolist()[index]
     single_stock_code = zeroize.zeroize(single_stock_code)
     single_buy_date = int(to_draw_file_df['buy_date'].tolist()[index])
-    ##画日K线
-    draw_k_line_fuc.draw_k_line(daily_stock_path,result_path + 'raw_tao/daily/',single_stock_code,
-                                single_buy_date,period_pre_daily,period_post_daily)
-    ##画周K线
-    draw_k_line_fuc.draw_k_line(weekly_stock_path, result_path + 'raw_tao/weekly/', single_stock_code,
-                                single_buy_date, period_pre_weekly, period_post_weekly)
-    ##画月K线
-    draw_k_line_fuc.draw_k_line(monthly_stock_path, result_path + 'raw_tao/monthly/', single_stock_code,
-                                single_buy_date, period_pre_monthly, period_post_monthly)
+    if os.path.exists(daily_stock_path + single_stock_code + '.csv') and \
+            os.path.exists(weekly_stock_path + single_stock_code + '.csv') and \
+            os.path.exists(monthly_stock_path + single_stock_code + '.csv'):
+        ##画日K线
+        draw_k_line_fuc.draw_k_line(daily_stock_path,result_path + 'raw_tao/daily/',single_stock_code,
+                                    single_buy_date,period_pre_daily,period_post_daily)
+        ##画周K线
+        draw_k_line_fuc.draw_k_line(weekly_stock_path, result_path + 'raw_tao/weekly/', single_stock_code,
+                                    single_buy_date, period_pre_weekly, period_post_weekly)
+        ##画月K线
+        draw_k_line_fuc.draw_k_line(monthly_stock_path, result_path + 'raw_tao/monthly/', single_stock_code,
+                                    single_buy_date, period_pre_monthly, period_post_monthly)
 
 
 end_time = time.time()

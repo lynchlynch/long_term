@@ -69,17 +69,18 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     # y_label_lower:设置成交量图一栏的标题
     # figratio:设置图形纵横比
     # figscale:设置图形尺寸(数值越大图像质量越高)
-    # buy_point = [0, df['Open'].tolist()[0]]
-    # print(buy_point)
-    # add_plot = [mpf.make_addplot(buy_point, type='scatter', markersize=200, marker='^', color='y')]
-    kwargs = dict(
+    # buy_point_list = df['ma5'].tolist()
+    buy_point_list = [min(df['Low'].tolist()) for i in range(len(df))]
+    buy_point_list[period_pre] = df['Open'].tolist()[period_pre]
+    add_plot = [mpf.make_addplot(buy_point_list, type='scatter', markersize=5000, marker='^', color='y')]
+    kwargs = dict(addplot=add_plot,
         type='candle',
         mav=(5, 20, 30, 60, 120, 250),
         volume=True,
         title='\nA_stock %s candle_line' % (symbol),
         ylabel='OHLC Candles',
         ylabel_lower='Shares\nTraded Volume',
-        figratio=(15, 10),
+        figratio=(5, 2.5),
         figscale=15)
 
     # 设置marketcolors

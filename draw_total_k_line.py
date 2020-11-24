@@ -41,9 +41,12 @@ for index in tqdm(range(len(to_draw_file_df)),desc='index'):
     ##画日K线
     draw_k_line_fuc.draw_k_line(daily_stock_path,result_path + 'raw_tao/daily/',single_stock_code,
                                 single_buy_date,period_pre_daily,period_post_daily)
-    # ##画周K线
-    # draw_k_line_fuc.draw_k_line(weekly_stock_path, result_path + 'raw_tao/weekly/', single_stock_code,
-    #                             single_buy_date, period_pre_weekly, period_post_weekly)
+    ##画周K线
+    draw_k_line_fuc.draw_k_line(weekly_stock_path, result_path + 'raw_tao/weekly/', single_stock_code,
+                                single_buy_date, period_pre_weekly, period_post_weekly)
+    ##画月K线
+    draw_k_line_fuc.draw_k_line(monthly_stock_path, result_path + 'raw_tao/monthly/', single_stock_code,
+                                single_buy_date, period_pre_monthly, period_post_monthly)
 
 
 end_time = time.time()

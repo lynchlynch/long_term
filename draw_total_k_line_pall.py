@@ -147,10 +147,11 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
     # plt.show()
 '''
 
-def draw_k_prll(daily_stock_path,weekly_stock_path,monthly_stock_path,period_pre_daily, period_post_daily,
+def draw_k_prll(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly_stock_path,period_pre_daily, period_post_daily,
                 period_pre_weekly, period_post_weekly, period_pre_monthly, period_post_monthly):
     single_stock_code = to_draw_file_df['stock_code'].tolist()[index]
     single_stock_code = zeroize.zeroize(single_stock_code)
+    print(str(len(to_draw_file_df)) + '--------' + str(index))
     single_buy_date = int(to_draw_file_df['buy_date'].tolist()[index])
     if os.path.exists(daily_stock_path + single_stock_code + '.csv') and \
             os.path.exists(weekly_stock_path + single_stock_code + '.csv') and \
@@ -198,9 +199,11 @@ if __name__ == '__main__':
     p = Pool(processes=2)
     for index in range(len(to_draw_file_df)):
     # for index in tqdm(range(len(to_draw_file_df)),desc='index'):
-        p.apply_async(draw_k_prll, args=(daily_stock_path,weekly_stock_path,monthly_stock_path,period_pre_daily,
-                                         period_post_daily, period_pre_weekly, period_post_weekly, period_pre_monthly,
-                                         period_post_monthly))
+    #     draw_k_prll(daily_stock_path, weekly_stock_path, monthly_stock_path, period_pre_daily,period_post_daily,
+    #                 period_pre_weekly, period_post_weekly, period_pre_monthly, period_post_monthly)
+        p.apply_async(draw_k_prll, args=(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly_stock_path,
+                                         period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
+                                         period_pre_monthly, period_post_monthly))
     p.close()
     p.join()
 

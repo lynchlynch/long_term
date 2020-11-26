@@ -169,20 +169,20 @@ def draw_k_prll(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly
 if __name__ == '__main__':
     start_time = time.time()
 
-    # daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-    daily_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
-    # weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-    weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
-    # monthly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/monthly_data/'
-    monthly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/monthly_data/'
-    # report_path = 'D:/pydir/Raw Data/Report/PerReport'
-    report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
-    # result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
-    result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
-    # weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
-    weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+    daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
+    # daily_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+    weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+    # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
+    monthly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/monthly_data/'
+    # monthly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/monthly_data/'
+    report_path = 'D:/pydir/Raw Data/Report/PerReport'
+    # report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
+    result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
+    # result_path = '/Users/pei/PycharmProjects/long_term/veri_result/veri_doctor_tao/'
+    weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
+    # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-    rps = 95
+    rps = 85
     period_pre_daily = 500
     period_post_daily = 250
     period_pre_weekly = 100
@@ -196,14 +196,15 @@ if __name__ == '__main__':
     to_draw_file_df = to_draw_file_df.dropna()
     to_draw_file_df = to_draw_file_df.drop('Unnamed: 0',axis=1)
 
-    p = Pool(processes=2)
+    p = Pool(processes=10)
     for index in range(len(to_draw_file_df)):
     # for index in tqdm(range(len(to_draw_file_df)),desc='index'):
-    #     draw_k_prll(daily_stock_path, weekly_stock_path, monthly_stock_path, period_pre_daily,period_post_daily,
-    #                 period_pre_weekly, period_post_weekly, period_pre_monthly, period_post_monthly)
+    #     draw_k_prll(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly_stock_path,
+    #                                      period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
+    #                                      period_pre_monthly, period_post_monthly)
         p.apply_async(draw_k_prll, args=(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly_stock_path,
-                                         period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
-                                         period_pre_monthly, period_post_monthly))
+                                             period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
+                                             period_pre_monthly, period_post_monthly))
     p.close()
     p.join()
 

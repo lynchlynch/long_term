@@ -80,8 +80,8 @@ def draw_k_line(daily_stock_path,fig_save_path,stock_code,start_date,period_pre,
         title='\nA_stock %s candle_line' % (symbol),
         ylabel='OHLC Candles',
         ylabel_lower='Shares\nTraded Volume',
-        figratio=(5, 2.5),
-        figscale=15)
+        figratio=(15, 10),
+        figscale=10)
 
     # 设置marketcolors
     # up:设置K线线柱颜色，up意为收盘价大于等于开盘价

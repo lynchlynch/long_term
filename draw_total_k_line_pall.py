@@ -182,7 +182,7 @@ if __name__ == '__main__':
     weekly_stock_path = 'D:/pydir/Raw Data/Tushare_pro/weekly_data/'
     # weekly_stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/weekly_data/'
 
-    rps = 85
+    rps = 95
     period_pre_daily = 500
     period_post_daily = 250
     period_pre_weekly = 100

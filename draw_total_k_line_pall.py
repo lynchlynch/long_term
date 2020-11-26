@@ -203,11 +203,10 @@ if __name__ == '__main__':
     #                                      period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
     #                                      period_pre_monthly, period_post_monthly)
         p.apply_async(draw_k_prll, args=(index,to_draw_file_df,daily_stock_path,weekly_stock_path,monthly_stock_path,
-                                             period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
-                                             period_pre_monthly, period_post_monthly))
+                                         period_pre_daily,period_post_daily, period_pre_weekly, period_post_weekly,
+                                         period_pre_monthly, period_post_monthly))
     p.close()
     p.join()
-
 
     end_time = time.time()
     print(end_time - start_time)

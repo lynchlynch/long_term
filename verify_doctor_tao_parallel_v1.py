@@ -227,15 +227,15 @@ if __name__ == '__main__':
             os.remove(weekly_stock_path + single_file)
     weekly_file_list = os.listdir(weekly_stock_path)
 
-    # p = Pool(processes=10)
+    p = Pool(processes=10)
     for week_index in list(range(len(week_list)))[52:]:
-        get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,rps_N2,rps_N3,
-                               stock_length,high_price_threshold, rps_threshold_list,weekly_file_list,duration_day)
-        # p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,
-        #                                            rps_N1,rps_N2,rps_N3,stock_length,high_price_threshold,
-        #                                            rps_threshold_list,weekly_file_list,duration_day))
-    # p.close()
-    # p.join()
+        # get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,rps_N2,rps_N3,
+        #                        stock_length,high_price_threshold, rps_threshold_list,weekly_file_list,duration_day)
+        p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,
+                                                   rps_N1,rps_N2,rps_N3,stock_length,high_price_threshold,
+                                                   rps_threshold_list,weekly_file_list,duration_day))
+    p.close()
+    p.join()
 
 
     per_day_result_list = os.listdir(result_path + 'buy_under_10k/')

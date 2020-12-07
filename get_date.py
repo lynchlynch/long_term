@@ -112,9 +112,9 @@ def get_buy_date_x(single_stock_data,single_stock_x_data,first_observe_date,x):
     # print('--------------')
     buy_date = 0xffff
     if first_observe_date < single_stock_date_list[-1]:
-        for week_index in range(single_stock_data+1, len(single_stock_date_list)-1):
+        for week_index in range(first_pre_index+1, len(single_stock_date_list)-1):
             pre_week_highest_price = single_stock_x_data['high'].tolist()[week_index]
-            x_ma = str(x)
+            x_ma = 'ma'+str(x)
             pre_x_ma = single_stock_x_data[x_ma].tolist()[week_index]
             pre_weekend_date = single_stock_x_data['trade_date'].tolist()[week_index]
 

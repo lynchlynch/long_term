@@ -149,9 +149,9 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
         single_stock_week_data = pd.read_csv(weekly_stock_path + zeroize.zeroize(single_code) + '.csv')
         # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data, week_end_date)
-        buy_date_monday = gd.get_buy_date_x(single_stock_data, single_stock_week_data, buy_observe_first_week,)
+        buy_date_monday = gd.get_buy_date_x(single_stock_data, single_stock_data, buy_observe_first_week,10)
         if type(buy_observe_first_week) == int:
-            buy_date_monday = gd.get_buy_date_10(single_stock_data,single_stock_week_data,buy_observe_first_week)
+            buy_date_monday = gd.get_buy_date_x(single_stock_data,single_stock_data,buy_observe_first_week,10)
             # print(buy_date_monday)
             if (type(buy_date_monday)) == int:  # and ([single_code,buy_date_monday] in buy_stock_log):
                 # 由于有可能存在连续好几天都出现doctor tao信号，而他们都是统一在同一天购买，因此会出现重复统计的情况，
@@ -193,7 +193,7 @@ if __name__ == '__main__':
     start_time = time.time()
 
     daily_stock_path = 'D:/pydir/Raw Data/Tushare_pro/daily_data/'
-    # stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
+    stock_path = '/Users/pei/PycharmProjects/Raw Data/Tushare_pro/daily_data/'
     report_path = 'D:/pydir/Raw Data/Report/PerReport'
     # report_path = '/Users/pei/PycharmProjects/Raw Data/Report/PerReport'
     result_path = 'D:/pydir/long_term/veri_result/veri_doctor_tao/'
@@ -209,8 +209,8 @@ if __name__ == '__main__':
     rps_N2 = 120
     rps_N3 = 250
     high_price_threshold = 0.9
-    # rps_threshold_list = [85, 85, 85]
-    rps_threshold_list = [72, 72, 72]
+    rps_threshold_list = [85, 85, 85]
+    # rps_threshold_list = [72, 72, 72]
     result_path = result_path + str(rps_threshold_list[0]) + '/'
 
     duration_month = 8
@@ -227,15 +227,15 @@ if __name__ == '__main__':
             os.remove(weekly_stock_path + single_file)
     weekly_file_list = os.listdir(weekly_stock_path)
 
-    p = Pool(processes=10)
+    # p = Pool(processes=10)
     for week_index in list(range(len(week_list)))[52:]:
-        # get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,rps_N2,rps_N3,
-        #                        stock_length,high_price_threshold,rps_threshold_list,weekly_file_list)
-        p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,
-                                                   rps_N1,rps_N2,rps_N3,stock_length,high_price_threshold,
-                                                   rps_threshold_list,weekly_file_list,duration_day))
-    p.close()
-    p.join()
+        get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,rps_N1,rps_N2,rps_N3,
+                               stock_length,high_price_threshold, rps_threshold_list,weekly_file_list,duration_day)
+        # p.apply_async(get_per_stock_buy_date,args=(week_list,week_index,daily_stock_path,weekly_stock_path,result_path,
+        #                                            rps_N1,rps_N2,rps_N3,stock_length,high_price_threshold,
+        #                                            rps_threshold_list,weekly_file_list,duration_day))
+    # p.close()
+    # p.join()
 
 
     per_day_result_list = os.listdir(result_path + 'buy_under_10k/')

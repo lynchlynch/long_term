@@ -149,7 +149,7 @@ def get_per_stock_buy_date(week_list,week_index,daily_stock_path,weekly_stock_pa
         single_stock_week_data = pd.read_csv(weekly_stock_path + zeroize.zeroize(single_code) + '.csv')
         # if len(single_stock_data) > 500 and len(single_stock_week_data) > 100:
         buy_observe_first_week = gd.get_first_observe_date(single_stock_data, week_end_date)
-        buy_date_monday = gd.get_buy_date_10(single_stock_data, single_stock_week_data, buy_observe_first_week)
+        buy_date_monday = gd.get_buy_date_x(single_stock_data, single_stock_week_data, buy_observe_first_week,)
         if type(buy_observe_first_week) == int:
             buy_date_monday = gd.get_buy_date_10(single_stock_data,single_stock_week_data,buy_observe_first_week)
             # print(buy_date_monday)

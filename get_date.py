@@ -98,26 +98,27 @@ def get_buy_date_x(single_stock_data,single_stock_x_data,first_observe_date,x):
     first_observe_date_index = single_stock_data['trade_date'].tolist().index(first_observe_date)
     # print(first_observe_date_index)
     # print(single_stock_data['trade_date'].tolist()[first_observe_date_index-1])
-    if single_stock_data['trade_date'].tolist()[first_observe_date_index-1] in single_stock_week_list:
-        first_pre_weekend_index = single_stock_week_list.index\
+    if single_stock_data['trade_date'].tolist()[first_observe_date_index-1] in single_stock_date_list:
+        first_pre_index = single_stock_date_list.index\
             (single_stock_data['trade_date'].tolist()[first_observe_date_index-1])
     else:
         for index in range(len(single_stock_data)-first_observe_date_index-1):
-            if single_stock_data['trade_date'].tolist()[first_observe_date_index+index] in single_stock_week_list:
-                first_pre_weekend_index = single_stock_week_list.index \
+            if single_stock_data['trade_date'].tolist()[first_observe_date_index+index] in single_stock_date_list:
+                first_pre_index = single_stock_date_list.index \
                     (single_stock_data['trade_date'].tolist()[first_observe_date_index+index])
                 break
     # print(first_pre_weekend_index+1)
     # print(len(single_stock_week_list)-1)
     # print('--------------')
     buy_date = 0xffff
-    if first_observe_date < single_stock_week_list[-1]:
-        for week_index in range(first_pre_weekend_index+1, len(single_stock_week_list)-1):
+    if first_observe_date < single_stock_date_list[-1]:
+        for week_index in range(single_stock_data+1, len(single_stock_date_list)-1):
             pre_week_highest_price = single_stock_x_data['high'].tolist()[week_index]
-            pre_week_10k_ma = single_stock_x_data['ma5'].tolist()[week_index]
+            x_ma = str(x)
+            pre_x_ma = single_stock_x_data[x_ma].tolist()[week_index]
             pre_weekend_date = single_stock_x_data['trade_date'].tolist()[week_index]
 
-            if pre_week_10k_ma >= pre_week_highest_price:
+            if pre_x_ma >= pre_week_highest_price:
                 if pre_weekend_date in single_stock_data['trade_date'].tolist():
                     pre_weekend_index_in_daily = single_stock_data['trade_date'].tolist().index(pre_weekend_date)
                     buy_date = single_stock_data['trade_date'].tolist()[pre_weekend_index_in_daily+1]
